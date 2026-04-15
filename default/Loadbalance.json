@@ -652,8 +652,8 @@
       "name" : "LogAttribute",
       "penaltyDuration" : "30 sec",
       "position" : {
-        "x" : -840.0,
-        "y" : 40.0
+        "x" : -808.0,
+        "y" : 104.0
       },
       "properties" : {
         "Log FlowFile Properties" : "true",
@@ -847,13 +847,86 @@
       "concurrentlySchedulableTaskCount" : 1,
       "executionNode" : "ALL",
       "groupIdentifier" : "flow-contents-group",
+      "identifier" : "63d5f4fa-6572-3a9f-bb09-926ee77472c4",
+      "maxBackoffPeriod" : "10 mins",
+      "name" : "DetectDuplicate",
+      "penaltyDuration" : "30 sec",
+      "position" : {
+        "x" : -1200.0,
+        "y" : 304.0
+      },
+      "properties" : {
+        "Cache Entry Identifier" : "${hash.value}",
+        "Cache The Entry Identifier" : "true",
+        "FlowFile Description" : ""
+      },
+      "propertyDescriptors" : {
+        "Cache Entry Identifier" : {
+          "displayName" : "Cache Entry Identifier",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Cache Entry Identifier",
+          "sensitive" : false
+        },
+        "Cache The Entry Identifier" : {
+          "displayName" : "Cache The Entry Identifier",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Cache The Entry Identifier",
+          "sensitive" : false
+        },
+        "Age Off Duration" : {
+          "displayName" : "Age Off Duration",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Age Off Duration",
+          "sensitive" : false
+        },
+        "FlowFile Description" : {
+          "displayName" : "FlowFile Description",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "FlowFile Description",
+          "sensitive" : false
+        },
+        "Distributed Cache Service" : {
+          "displayName" : "Distributed Cache Service",
+          "dynamic" : false,
+          "identifiesControllerService" : true,
+          "name" : "Distributed Cache Service",
+          "sensitive" : false
+        }
+      },
+      "retriedRelationships" : [ ],
+      "retryCount" : 10,
+      "runDurationMillis" : 25,
+      "scheduledState" : "ENABLED",
+      "schedulingPeriod" : "0 sec",
+      "schedulingStrategy" : "TIMER_DRIVEN",
+      "style" : { },
+      "type" : "org.apache.nifi.processors.standard.DetectDuplicate",
+      "yieldDuration" : "1 sec"
+    }, {
+      "autoTerminatedRelationships" : [ ],
+      "backoffMechanism" : "PENALIZE_FLOWFILE",
+      "bulletinLevel" : "WARN",
+      "bundle" : {
+        "artifact" : "nifi-standard-nar",
+        "group" : "org.apache.nifi",
+        "version" : "2.8.0"
+      },
+      "comments" : "",
+      "componentType" : "PROCESSOR",
+      "concurrentlySchedulableTaskCount" : 1,
+      "executionNode" : "ALL",
+      "groupIdentifier" : "flow-contents-group",
       "identifier" : "a9d18a95-038e-3a9e-97b0-35ac56d13666",
       "maxBackoffPeriod" : "10 mins",
       "name" : "LogAttribute",
       "penaltyDuration" : "30 sec",
       "position" : {
-        "x" : -1455.999991513624,
-        "y" : 375.0000134657348
+        "x" : -1200.0,
+        "y" : 136.0
       },
       "properties" : {
         "Log FlowFile Properties" : "true",
@@ -956,6 +1029,6 @@
   "snapshotMetadata" : {
     "author" : "CN=admin, OU=NIFI",
     "flowIdentifier" : "Loadbalance",
-    "timestamp" : 1776251695217
+    "timestamp" : 1776254589111
   }
 }
