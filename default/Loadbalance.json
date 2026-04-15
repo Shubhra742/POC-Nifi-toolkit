@@ -763,6 +763,21 @@
       "componentType" : "LABEL",
       "groupIdentifier" : "flow-contents-group",
       "height" : 150.0,
+      "identifier" : "e201518c-60d5-34bc-970a-2a444ec96bdc",
+      "label" : "Test",
+      "position" : {
+        "x" : -14.999991513624082,
+        "y" : 207.0000134657348
+      },
+      "style" : {
+        "font-size" : "12px"
+      },
+      "width" : 150.0,
+      "zIndex" : 3
+    }, {
+      "componentType" : "LABEL",
+      "groupIdentifier" : "flow-contents-group",
+      "height" : 150.0,
       "identifier" : "f7f38da9-022d-3b5f-84aa-df1e325b5739",
       "label" : "Detect duplicate processor",
       "position" : {
@@ -1504,6 +1519,6 @@
   "snapshotMetadata" : {
     "author" : "CN=admin, OU=NIFI",
     "flowIdentifier" : "Loadbalance",
-    "timestamp" : 1776245630111
+    "timestamp" : 1776246017475
   }
 }
