@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
@@ -21,43 +21,114 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
           echo "Deploying version: $VERSION"
 
+      - name: Set up Java 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Download NiFi Toolkit 2.8.0
+        run: |
+          wget -q https://archive.apache.org/dist/nifi/2.8.0/nifi-toolkit-2.8.0-bin.zip
+          unzip -q nifi-toolkit-2.8.0-bin.zip
+          chmod +x nifi-toolkit-2.8.0/bin/cli.sh
+          echo "Toolkit ready"
+
+      - name: Restore keystore and truststore
+        run: |
+          echo "${{ secrets.NIFI_KEYSTORE_B64 }}" | base64 -d > /tmp/keystore.jks
+          echo "${{ secrets.NIFI_TRUSTSTORE_B64 }}" | base64 -d > /tmp/truststore.jks
+          echo "Keystores restored"
+
+      - name: Create NiFi props file
+        run: |
+          cat > /tmp/nifi-prod.props << PROPS
+          baseUrl=https://13.203.24.214:8447
+          keystore=/tmp/keystore.jks
+          keystoreType=JKS
+          keystorePasswd=${{ secrets.NIFI_KEYSTORE_PASS }}
+          keyPasswd=${{ secrets.NIFI_KEYSTORE_PASS }}
+          truststore=/tmp/truststore.jks
+          truststoreType=JKS
+          truststorePasswd=${{ secrets.NIFI_TRUSTSTORE_PASS }}
+          PROPS
+          echo "Props file created"
+
       - name: Stop PROD flow
         run: |
-          /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-stop \
-            -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
-            -pgid 9045c02f-019d-1000-8fab-b3062dbc2a0c
+          ./nifi-toolkit-2.8.0/bin/cli.sh nifi pg-stop \
+            -p /tmp/nifi-prod.props \
+            -pgid ${{ secrets.NIFI_PROD_PG_ID }}
+          echo "PROD stopped"
 
       - name: Deploy new version to PROD
         run: |
-          /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-change-version \
-            -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
-            -pgid 9045c02f-019d-1000-8fab-b3062dbc2a0c \
+          ./nifi-toolkit-2.8.0/bin/cli.sh nifi pg-change-version \
+            -p /tmp/nifi-prod.props \
+            -pgid ${{ secrets.NIFI_PROD_PG_ID }} \
             -fv ${{ steps.version.outputs.VERSION }}
+          echo "Deployed: ${{ steps.version.outputs.VERSION }}"
 
       - name: Start PROD flow
         run: |
-          /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-start \
-            -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
-            -pgid 9045c02f-019d-1000-8fab-b3062dbc2a0c
+          ./nifi-toolkit-2.8.0/bin/cli.sh nifi pg-start \
+            -p /tmp/nifi-prod.props \
+            -pgid ${{ secrets.NIFI_PROD_PG_ID }}
+          echo "PROD started"
 
       - name: Verify deployment
         run: |
-          /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-get-version \
-            -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
-            -pgid 9045c02f-019d-1000-8fab-b3062dbc2a0c
+          ./nifi-toolkit-2.8.0/bin/cli.sh nifi pg-get-version \
+            -p /tmp/nifi-prod.props \
+            -pgid ${{ secrets.NIFI_PROD_PG_ID }}
 
   rollback:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: deploy
     if: failure()
 
     steps:
-      - name: Auto Rollback to previous version
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Download NiFi Toolkit
+        run: |
+          wget -q https://archive.apache.org/dist/nifi/2.8.0/nifi-toolkit-2.8.0-bin.zip
+          unzip -q nifi-toolkit-2.8.0-bin.zip
+          chmod +x nifi-toolkit-2.8.0/bin/cli.sh
+
+      - name: Restore keystore and truststore
+        run: |
+          echo "${{ secrets.NIFI_KEYSTORE_B64 }}" | base64 -d > /tmp/keystore.jks
+          echo "${{ secrets.NIFI_TRUSTSTORE_B64 }}" | base64 -d > /tmp/truststore.jks
+
+      - name: Create NiFi props file
+        run: |
+          cat > /tmp/nifi-prod.props << PROPS
+          baseUrl=https://13.203.24.214:8447
+          keystore=/tmp/keystore.jks
+          keystoreType=JKS
+          keystorePasswd=${{ secrets.NIFI_KEYSTORE_PASS }}
+          keyPasswd=${{ secrets.NIFI_KEYSTORE_PASS }}
+          truststore=/tmp/truststore.jks
+          truststoreType=JKS
+          truststorePasswd=${{ secrets.NIFI_TRUSTSTORE_PASS }}
+          PROPS
+
+      - name: Auto Rollback
         run: |
           PREV=$(git rev-parse HEAD~1)
           echo "Rolling back to: $PREV"
-          /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-change-version \
-            -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
-            -pgid 9045c02f-019d-1000-8fab-b3062dbc2a0c \
+          ./nifi-toolkit-2.8.0/bin/cli.sh nifi pg-change-version \
+            -p /tmp/nifi-prod.props \
+            -pgid ${{ secrets.NIFI_PROD_PG_ID }} \
             -fv $PREV
           echo "Rolled back to: $PREV"
