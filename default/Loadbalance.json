@@ -744,7 +744,22 @@
     "funnels" : [ ],
     "identifier" : "flow-contents-group",
     "inputPorts" : [ ],
-    "labels" : [ ],
+    "labels" : [ {
+      "componentType" : "LABEL",
+      "groupIdentifier" : "flow-contents-group",
+      "height" : 64.0,
+      "identifier" : "0297bbb6-c7ad-337f-99be-ee1564749dbd",
+      "label" : "V2_changes",
+      "position" : {
+        "x" : 232.0,
+        "y" : 56.0
+      },
+      "style" : {
+        "font-size" : "12px"
+      },
+      "width" : 320.0,
+      "zIndex" : 1
+    } ],
     "maxConcurrentTasks" : 1,
     "name" : "Load_Balance",
     "outputPorts" : [ ],
@@ -1401,6 +1416,6 @@
   "snapshotMetadata" : {
     "author" : "CN=admin, OU=NIFI",
     "flowIdentifier" : "Loadbalance",
-    "timestamp" : 1776239782420
+    "timestamp" : 1776242082474
   }
 }
