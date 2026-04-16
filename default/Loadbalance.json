@@ -11,7 +11,127 @@
   "flowContents" : {
     "comments" : "",
     "componentType" : "PROCESS_GROUP",
-    "connections" : [ ],
+    "connections" : [ {
+      "backPressureDataSizeThreshold" : "1 GB",
+      "backPressureObjectThreshold" : 10000,
+      "bends" : [ ],
+      "componentType" : "CONNECTION",
+      "destination" : {
+        "comments" : "",
+        "groupId" : "flow-contents-group",
+        "id" : "94a87e80-019d-1000-fe05-c4b38786e890",
+        "name" : "MergeContent",
+        "type" : "PROCESSOR"
+      },
+      "flowFileExpiration" : "0 sec",
+      "groupIdentifier" : "flow-contents-group",
+      "identifier" : "94a87e87-019d-1000-e3f3-46ebd0ce2fe9",
+      "labelIndex" : 0,
+      "loadBalanceCompression" : "DO_NOT_COMPRESS",
+      "loadBalanceStrategy" : "SINGLE_NODE",
+      "name" : "",
+      "partitioningAttribute" : "",
+      "prioritizers" : [ ],
+      "selectedRelationships" : [ "success" ],
+      "source" : {
+        "comments" : "",
+        "groupId" : "flow-contents-group",
+        "id" : "94a87e83-019d-1000-cc4d-9e94645955d5",
+        "name" : "UpdateAttribute",
+        "type" : "PROCESSOR"
+      },
+      "zIndex" : 5
+    }, {
+      "backPressureDataSizeThreshold" : "1 GB",
+      "backPressureObjectThreshold" : 10000,
+      "bends" : [ ],
+      "componentType" : "CONNECTION",
+      "destination" : {
+        "comments" : "",
+        "groupId" : "flow-contents-group",
+        "id" : "94a87e85-019d-1000-f0f6-0e0d5bcd150d",
+        "name" : "LogAttribute",
+        "type" : "PROCESSOR"
+      },
+      "flowFileExpiration" : "0 sec",
+      "groupIdentifier" : "flow-contents-group",
+      "identifier" : "94a87e88-019d-1000-b03b-001273afcf52",
+      "labelIndex" : 1,
+      "loadBalanceCompression" : "DO_NOT_COMPRESS",
+      "loadBalanceStrategy" : "DO_NOT_LOAD_BALANCE",
+      "name" : "",
+      "partitioningAttribute" : "",
+      "prioritizers" : [ ],
+      "selectedRelationships" : [ "merged" ],
+      "source" : {
+        "comments" : "",
+        "groupId" : "flow-contents-group",
+        "id" : "94a87e80-019d-1000-fe05-c4b38786e890",
+        "name" : "MergeContent",
+        "type" : "PROCESSOR"
+      },
+      "zIndex" : 0
+    }, {
+      "backPressureDataSizeThreshold" : "1 GB",
+      "backPressureObjectThreshold" : 10000,
+      "bends" : [ ],
+      "componentType" : "CONNECTION",
+      "destination" : {
+        "comments" : "",
+        "groupId" : "flow-contents-group",
+        "id" : "94a87e83-019d-1000-cc4d-9e94645955d5",
+        "name" : "UpdateAttribute",
+        "type" : "PROCESSOR"
+      },
+      "flowFileExpiration" : "0 sec",
+      "groupIdentifier" : "flow-contents-group",
+      "identifier" : "94a87e89-019d-1000-b811-53aa37a2d7df",
+      "labelIndex" : 0,
+      "loadBalanceCompression" : "DO_NOT_COMPRESS",
+      "loadBalanceStrategy" : "ROUND_ROBIN",
+      "name" : "",
+      "partitioningAttribute" : "",
+      "prioritizers" : [ ],
+      "selectedRelationships" : [ "splits" ],
+      "source" : {
+        "comments" : "",
+        "groupId" : "flow-contents-group",
+        "id" : "94a87e86-019d-1000-c510-57d40dac5644",
+        "name" : "SplitRecord",
+        "type" : "PROCESSOR"
+      },
+      "zIndex" : 4
+    }, {
+      "backPressureDataSizeThreshold" : "1 GB",
+      "backPressureObjectThreshold" : 10000,
+      "bends" : [ ],
+      "componentType" : "CONNECTION",
+      "destination" : {
+        "comments" : "",
+        "groupId" : "flow-contents-group",
+        "id" : "94a87e86-019d-1000-c510-57d40dac5644",
+        "name" : "SplitRecord",
+        "type" : "PROCESSOR"
+      },
+      "flowFileExpiration" : "0 sec",
+      "groupIdentifier" : "flow-contents-group",
+      "identifier" : "94a87e8a-019d-1000-584b-b257f9b90b67",
+      "labelIndex" : 1,
+      "loadBalanceCompression" : "DO_NOT_COMPRESS",
+      "loadBalanceStrategy" : "ROUND_ROBIN",
+      "name" : "",
+      "partitioningAttribute" : "",
+      "prioritizers" : [ ],
+      "selectedRelationships" : [ "success" ],
+      "source" : {
+        "comments" : "",
+        "groupId" : "flow-contents-group",
+        "id" : "94a87e84-019d-1000-9fd5-78aae7d403c1",
+        "name" : "GenerateFlowFile",
+        "type" : "PROCESSOR"
+      },
+      "zIndex" : 0
+    } ],
     "controllerServices" : [ {
       "bulletinLevel" : "WARN",
       "bundle" : {
@@ -634,7 +754,7 @@
     },
     "processGroups" : [ ],
     "processors" : [ {
-      "autoTerminatedRelationships" : [ ],
+      "autoTerminatedRelationships" : [ "failure", "original" ],
       "backoffMechanism" : "PENALIZE_FLOWFILE",
       "bulletinLevel" : "WARN",
       "bundle" : {
@@ -647,91 +767,245 @@
       "concurrentlySchedulableTaskCount" : 1,
       "executionNode" : "ALL",
       "groupIdentifier" : "flow-contents-group",
-      "identifier" : "0deaf376-afb8-36e2-a51a-c495b7282de9",
+      "identifier" : "94a87e80-019d-1000-fe05-c4b38786e890",
       "maxBackoffPeriod" : "10 mins",
-      "name" : "LogAttribute",
+      "name" : "MergeContent",
       "penaltyDuration" : "30 sec",
       "position" : {
-        "x" : -808.0,
-        "y" : 104.0
+        "x" : -616.9999915136241,
+        "y" : 308.0000134657348
       },
       "properties" : {
-        "Log FlowFile Properties" : "true",
-        "Log Level" : "info",
-        "Output Format" : "Line per Attribute",
-        "Log Payload" : "false",
-        "Character Set" : "UTF-8",
-        "Attributes to Log Regular Expression" : ".*"
+        "Metadata Strategy" : "Do Not Merge Uncommon Metadata",
+        "Keep Path" : "false",
+        "Merge Strategy" : "Bin-Packing Algorithm",
+        "Attribute Strategy" : "Keep Only Common Attributes",
+        "FlowFile Insertion Strategy" : "Last in Bin",
+        "Compression Level" : "1",
+        "Maximum Number of Entries" : "1000",
+        "Maximum Number of Bins" : "5",
+        "Minimum Group Size" : "0 B",
+        "Tar Modified Time" : "${file.lastModifiedTime}",
+        "Delimiter Strategy" : "Do Not Use Delimiters",
+        "Merge Format" : "Binary Concatenation",
+        "Minimum Number of Entries" : "10"
       },
       "propertyDescriptors" : {
-        "Log FlowFile Properties" : {
-          "displayName" : "Log FlowFile Properties",
+        "Metadata Strategy" : {
+          "displayName" : "Metadata Strategy",
           "dynamic" : false,
           "identifiesControllerService" : false,
-          "name" : "Log FlowFile Properties",
+          "name" : "Metadata Strategy",
           "sensitive" : false
         },
-        "Log Level" : {
-          "displayName" : "Log Level",
+        "Keep Path" : {
+          "displayName" : "Keep Path",
           "dynamic" : false,
           "identifiesControllerService" : false,
-          "name" : "Log Level",
+          "name" : "Keep Path",
           "sensitive" : false
         },
-        "Attributes to Ignore" : {
-          "displayName" : "Attributes to Ignore",
+        "Maximum Group Size" : {
+          "displayName" : "Maximum Group Size",
           "dynamic" : false,
           "identifiesControllerService" : false,
-          "name" : "Attributes to Ignore",
+          "name" : "Maximum Group Size",
           "sensitive" : false
         },
-        "Attributes to Log" : {
-          "displayName" : "Attributes to Log",
+        "Merge Strategy" : {
+          "displayName" : "Merge Strategy",
           "dynamic" : false,
           "identifiesControllerService" : false,
-          "name" : "Attributes to Log",
+          "name" : "Merge Strategy",
           "sensitive" : false
         },
-        "Attributes to Ignore Regular Expression" : {
-          "displayName" : "Attributes to Ignore Regular Expression",
+        "Attribute Strategy" : {
+          "displayName" : "Attribute Strategy",
           "dynamic" : false,
           "identifiesControllerService" : false,
-          "name" : "Attributes to Ignore Regular Expression",
+          "name" : "Attribute Strategy",
           "sensitive" : false
         },
-        "Output Format" : {
-          "displayName" : "Output Format",
+        "FlowFile Insertion Strategy" : {
+          "displayName" : "FlowFile Insertion Strategy",
           "dynamic" : false,
           "identifiesControllerService" : false,
-          "name" : "Output Format",
+          "name" : "FlowFile Insertion Strategy",
           "sensitive" : false
         },
-        "Log Payload" : {
-          "displayName" : "Log Payload",
+        "Compression Level" : {
+          "displayName" : "Compression Level",
           "dynamic" : false,
           "identifiesControllerService" : false,
-          "name" : "Log Payload",
+          "name" : "Compression Level",
           "sensitive" : false
         },
-        "Log Prefix" : {
-          "displayName" : "Log Prefix",
+        "Maximum Number of Entries" : {
+          "displayName" : "Maximum Number of Entries",
           "dynamic" : false,
           "identifiesControllerService" : false,
-          "name" : "Log Prefix",
+          "name" : "Maximum Number of Entries",
           "sensitive" : false
         },
-        "Character Set" : {
-          "displayName" : "Character Set",
+        "Maximum Number of Bins" : {
+          "displayName" : "Maximum Number of Bins",
           "dynamic" : false,
           "identifiesControllerService" : false,
-          "name" : "Character Set",
+          "name" : "Maximum Number of Bins",
           "sensitive" : false
         },
-        "Attributes to Log Regular Expression" : {
-          "displayName" : "Attributes to Log Regular Expression",
+        "Minimum Group Size" : {
+          "displayName" : "Minimum Group Size",
           "dynamic" : false,
           "identifiesControllerService" : false,
-          "name" : "Attributes to Log Regular Expression",
+          "name" : "Minimum Group Size",
+          "sensitive" : false
+        },
+        "Tar Modified Time" : {
+          "displayName" : "Tar Modified Time",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Tar Modified Time",
+          "sensitive" : false
+        },
+        "Delimiter Strategy" : {
+          "displayName" : "Delimiter Strategy",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Delimiter Strategy",
+          "sensitive" : false
+        },
+        "Header" : {
+          "displayName" : "Header",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Header",
+          "resourceDefinition" : {
+            "cardinality" : "SINGLE",
+            "resourceTypes" : [ "FILE", "TEXT" ]
+          },
+          "sensitive" : false
+        },
+        "Merge Format" : {
+          "displayName" : "Merge Format",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Merge Format",
+          "sensitive" : false
+        },
+        "Max Bin Age" : {
+          "displayName" : "Max Bin Age",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Max Bin Age",
+          "sensitive" : false
+        },
+        "Footer" : {
+          "displayName" : "Footer",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Footer",
+          "resourceDefinition" : {
+            "cardinality" : "SINGLE",
+            "resourceTypes" : [ "FILE", "TEXT" ]
+          },
+          "sensitive" : false
+        },
+        "Correlation Attribute Name" : {
+          "displayName" : "Correlation Attribute Name",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Correlation Attribute Name",
+          "sensitive" : false
+        },
+        "Demarcator" : {
+          "displayName" : "Demarcator",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Demarcator",
+          "resourceDefinition" : {
+            "cardinality" : "SINGLE",
+            "resourceTypes" : [ "FILE", "TEXT" ]
+          },
+          "sensitive" : false
+        },
+        "Bin Termination Check" : {
+          "displayName" : "Bin Termination Check",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Bin Termination Check",
+          "sensitive" : false
+        },
+        "Minimum Number of Entries" : {
+          "displayName" : "Minimum Number of Entries",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Minimum Number of Entries",
+          "sensitive" : false
+        }
+      },
+      "retriedRelationships" : [ ],
+      "retryCount" : 10,
+      "runDurationMillis" : 0,
+      "scheduledState" : "ENABLED",
+      "schedulingPeriod" : "0 sec",
+      "schedulingStrategy" : "TIMER_DRIVEN",
+      "style" : { },
+      "type" : "org.apache.nifi.processors.standard.MergeContent",
+      "yieldDuration" : "1 sec"
+    }, {
+      "autoTerminatedRelationships" : [ ],
+      "backoffMechanism" : "PENALIZE_FLOWFILE",
+      "bulletinLevel" : "WARN",
+      "bundle" : {
+        "artifact" : "nifi-update-attribute-nar",
+        "group" : "org.apache.nifi",
+        "version" : "2.8.0"
+      },
+      "comments" : "",
+      "componentType" : "PROCESSOR",
+      "concurrentlySchedulableTaskCount" : 1,
+      "executionNode" : "ALL",
+      "groupIdentifier" : "flow-contents-group",
+      "identifier" : "94a87e83-019d-1000-cc4d-9e94645955d5",
+      "maxBackoffPeriod" : "10 mins",
+      "name" : "UpdateAttribute",
+      "penaltyDuration" : "30 sec",
+      "position" : {
+        "x" : -600.9999915136241,
+        "y" : 60.00001346573481
+      },
+      "properties" : {
+        "Store State" : "Do not store state",
+        "Cache Value Lookup Cache Size" : "100"
+      },
+      "propertyDescriptors" : {
+        "Delete Attributes Expression" : {
+          "displayName" : "Delete Attributes Expression",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Delete Attributes Expression",
+          "sensitive" : false
+        },
+        "Store State" : {
+          "displayName" : "Store State",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Store State",
+          "sensitive" : false
+        },
+        "Cache Value Lookup Cache Size" : {
+          "displayName" : "Cache Value Lookup Cache Size",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Cache Value Lookup Cache Size",
+          "sensitive" : false
+        },
+        "Stateful Variables Initial Value" : {
+          "displayName" : "Stateful Variables Initial Value",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Stateful Variables Initial Value",
           "sensitive" : false
         }
       },
@@ -742,7 +1016,7 @@
       "schedulingPeriod" : "0 sec",
       "schedulingStrategy" : "TIMER_DRIVEN",
       "style" : { },
-      "type" : "org.apache.nifi.processors.standard.LogAttribute",
+      "type" : "org.apache.nifi.processors.attributes.UpdateAttribute",
       "yieldDuration" : "1 sec"
     }, {
       "autoTerminatedRelationships" : [ ],
@@ -755,21 +1029,22 @@
       },
       "comments" : "",
       "componentType" : "PROCESSOR",
-      "concurrentlySchedulableTaskCount" : 1,
-      "executionNode" : "ALL",
+      "concurrentlySchedulableTaskCount" : 100,
+      "executionNode" : "PRIMARY",
       "groupIdentifier" : "flow-contents-group",
-      "identifier" : "5b0dc3f9-e7a8-3169-963f-91402194f3fd",
+      "identifier" : "94a87e84-019d-1000-9fd5-78aae7d403c1",
       "maxBackoffPeriod" : "10 mins",
       "name" : "GenerateFlowFile",
       "penaltyDuration" : "30 sec",
       "position" : {
-        "x" : -1186.999991513624,
-        "y" : -29.99998653426519
+        "x" : -1928.999991513624,
+        "y" : 68.00001346573481
       },
       "properties" : {
         "File Size" : "0B",
         "Batch Size" : "1",
         "Unique FlowFiles" : "false",
+        "Custom Text" : "transaction_id,customer_name,product,quantity,unit_price,status\nTXN-1001,Alice Johnson,Laptop,1,75000.00,completed\nTXN-1002,Ravi Sharma,Mouse,3,850.00,completed\nTXN-1003,Priya Mehta,Keyboard,2,1200.00,pending\nTXN-1004,Bob Williams,Monitor,1,18500.00,completed\nTXN-1005,Anjali Verma,Headphones,2,3200.00,failed\nTXN-1006,Carlos Diaz,Webcam,1,2100.00,completed\nTXN-1007,Sneha Patil,USB Hub,4,650.00,pending\nTXN-1008,Tom Harris,SSD Drive,2,5400.00,completed\nTXN-1009,Meera Nair,Laptop Stand,1,1800.00,completed\nTXN-10010,Meera Nair,Laptop Stand,1,1800.00,completed",
         "Character Set" : "UTF-8",
         "Data Format" : "Text"
       },
@@ -834,7 +1109,7 @@
       "type" : "org.apache.nifi.processors.standard.GenerateFlowFile",
       "yieldDuration" : "1 sec"
     }, {
-      "autoTerminatedRelationships" : [ ],
+      "autoTerminatedRelationships" : [ "success" ],
       "backoffMechanism" : "PENALIZE_FLOWFILE",
       "bulletinLevel" : "WARN",
       "bundle" : {
@@ -847,86 +1122,13 @@
       "concurrentlySchedulableTaskCount" : 1,
       "executionNode" : "ALL",
       "groupIdentifier" : "flow-contents-group",
-      "identifier" : "63d5f4fa-6572-3a9f-bb09-926ee77472c4",
-      "maxBackoffPeriod" : "10 mins",
-      "name" : "DetectDuplicate",
-      "penaltyDuration" : "30 sec",
-      "position" : {
-        "x" : -1200.0,
-        "y" : 304.0
-      },
-      "properties" : {
-        "Cache Entry Identifier" : "${hash.value}",
-        "Cache The Entry Identifier" : "true",
-        "FlowFile Description" : ""
-      },
-      "propertyDescriptors" : {
-        "Cache Entry Identifier" : {
-          "displayName" : "Cache Entry Identifier",
-          "dynamic" : false,
-          "identifiesControllerService" : false,
-          "name" : "Cache Entry Identifier",
-          "sensitive" : false
-        },
-        "Cache The Entry Identifier" : {
-          "displayName" : "Cache The Entry Identifier",
-          "dynamic" : false,
-          "identifiesControllerService" : false,
-          "name" : "Cache The Entry Identifier",
-          "sensitive" : false
-        },
-        "Age Off Duration" : {
-          "displayName" : "Age Off Duration",
-          "dynamic" : false,
-          "identifiesControllerService" : false,
-          "name" : "Age Off Duration",
-          "sensitive" : false
-        },
-        "FlowFile Description" : {
-          "displayName" : "FlowFile Description",
-          "dynamic" : false,
-          "identifiesControllerService" : false,
-          "name" : "FlowFile Description",
-          "sensitive" : false
-        },
-        "Distributed Cache Service" : {
-          "displayName" : "Distributed Cache Service",
-          "dynamic" : false,
-          "identifiesControllerService" : true,
-          "name" : "Distributed Cache Service",
-          "sensitive" : false
-        }
-      },
-      "retriedRelationships" : [ ],
-      "retryCount" : 10,
-      "runDurationMillis" : 25,
-      "scheduledState" : "ENABLED",
-      "schedulingPeriod" : "0 sec",
-      "schedulingStrategy" : "TIMER_DRIVEN",
-      "style" : { },
-      "type" : "org.apache.nifi.processors.standard.DetectDuplicate",
-      "yieldDuration" : "1 sec"
-    }, {
-      "autoTerminatedRelationships" : [ ],
-      "backoffMechanism" : "PENALIZE_FLOWFILE",
-      "bulletinLevel" : "WARN",
-      "bundle" : {
-        "artifact" : "nifi-standard-nar",
-        "group" : "org.apache.nifi",
-        "version" : "2.8.0"
-      },
-      "comments" : "",
-      "componentType" : "PROCESSOR",
-      "concurrentlySchedulableTaskCount" : 1,
-      "executionNode" : "ALL",
-      "groupIdentifier" : "flow-contents-group",
-      "identifier" : "a9d18a95-038e-3a9e-97b0-35ac56d13666",
+      "identifier" : "94a87e85-019d-1000-f0f6-0e0d5bcd150d",
       "maxBackoffPeriod" : "10 mins",
       "name" : "LogAttribute",
       "penaltyDuration" : "30 sec",
       "position" : {
-        "x" : -1200.0,
-        "y" : 136.0
+        "x" : -1448.999991513624,
+        "y" : 332.0000134657348
       },
       "properties" : {
         "Log FlowFile Properties" : "true",
@@ -1017,6 +1219,65 @@
       "style" : { },
       "type" : "org.apache.nifi.processors.standard.LogAttribute",
       "yieldDuration" : "1 sec"
+    }, {
+      "autoTerminatedRelationships" : [ "failure", "original" ],
+      "backoffMechanism" : "PENALIZE_FLOWFILE",
+      "bulletinLevel" : "WARN",
+      "bundle" : {
+        "artifact" : "nifi-standard-nar",
+        "group" : "org.apache.nifi",
+        "version" : "2.8.0"
+      },
+      "comments" : "",
+      "componentType" : "PROCESSOR",
+      "concurrentlySchedulableTaskCount" : 1,
+      "executionNode" : "ALL",
+      "groupIdentifier" : "flow-contents-group",
+      "identifier" : "94a87e86-019d-1000-c510-57d40dac5644",
+      "maxBackoffPeriod" : "10 mins",
+      "name" : "SplitRecord",
+      "penaltyDuration" : "30 sec",
+      "position" : {
+        "x" : -1280.999991513624,
+        "y" : 60.00001346573481
+      },
+      "properties" : {
+        "Record Writer" : "83018726-6714-3a53-9c7a-e07bd8e1c416",
+        "Record Reader" : "280ccd2d-a9aa-3635-b927-68eda2e5c357",
+        "Records Per Split" : "1"
+      },
+      "propertyDescriptors" : {
+        "Record Writer" : {
+          "displayName" : "Record Writer",
+          "dynamic" : false,
+          "identifiesControllerService" : true,
+          "name" : "Record Writer",
+          "sensitive" : false
+        },
+        "Record Reader" : {
+          "displayName" : "Record Reader",
+          "dynamic" : false,
+          "identifiesControllerService" : true,
+          "name" : "Record Reader",
+          "sensitive" : false
+        },
+        "Records Per Split" : {
+          "displayName" : "Records Per Split",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Records Per Split",
+          "sensitive" : false
+        }
+      },
+      "retriedRelationships" : [ ],
+      "retryCount" : 10,
+      "runDurationMillis" : 0,
+      "scheduledState" : "ENABLED",
+      "schedulingPeriod" : "0 sec",
+      "schedulingStrategy" : "TIMER_DRIVEN",
+      "style" : { },
+      "type" : "org.apache.nifi.processors.standard.SplitRecord",
+      "yieldDuration" : "1 sec"
     } ],
     "remoteProcessGroups" : [ ],
     "scheduledState" : "ENABLED",
@@ -1029,6 +1290,6 @@
   "snapshotMetadata" : {
     "author" : "CN=admin, OU=NIFI",
     "flowIdentifier" : "Loadbalance",
-    "timestamp" : 1776254589111
+    "timestamp" : 1776315592318
   }
 }
