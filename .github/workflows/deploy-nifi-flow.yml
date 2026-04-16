@@ -1,1 +1,78 @@
+name: Deploy NiFi Flow to Production
 
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'default/*.json'
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Get commit SHA and flow name
+        id: info
+        run: |
+          VERSION=$(git rev-parse HEAD)
+          CHANGED=$(git diff --name-only HEAD~1 HEAD | grep "default/.*\.json" | head -1)
+          FLOW_NAME=$(basename "$CHANGED" .json)
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "FLOW_NAME=$FLOW_NAME" >> $GITHUB_OUTPUT
+          echo "Flow: $FLOW_NAME | SHA: $VERSION"
+
+      - name: Find PROD process group ID
+        id: pgid
+        run: |
+          PG_ID=$(python3 find_pg.py \
+            "${{ steps.info.outputs.FLOW_NAME }}" \
+            /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
+            52295672-019d-1000-b5ff-9d0bfbe1b89a)
+          echo "PG_ID=$PG_ID" >> $GITHUB_OUTPUT
+          echo "Found PG: $PG_ID"
+
+      - name: Deploy to PROD
+        run: |
+          /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-change-version \
+            -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
+            -pgid ${{ steps.pgid.outputs.PG_ID }} \
+            -fv ${{ steps.info.outputs.VERSION }}
+          echo "✅ Deployed!"
+
+      - name: Verify deployment
+        run: |
+          /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-get-version \
+            -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
+            -pgid ${{ steps.pgid.outputs.PG_ID }}
+
+  rollback:
+    runs-on: self-hosted
+    needs: deploy
+    if: failure()
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Rollback to previous version
+        run: |
+          PREV=$(git rev-parse HEAD~1)
+          CHANGED=$(git diff --name-only HEAD~1 HEAD | grep "default/.*\.json" | head -1)
+          FLOW_NAME=$(basename "$CHANGED" .json)
+          PG_ID=$(python3 find_pg.py \
+            "$FLOW_NAME" \
+            /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
+            52295672-019d-1000-b5ff-9d0bfbe1b89a)
+          echo "Rolling back $PG_ID to $PREV"
+          /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-change-version \
+            -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
+            -pgid $PG_ID \
+            -fv $PREV
+          echo "⚠️ Rolled back to: $PREV"
