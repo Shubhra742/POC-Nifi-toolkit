@@ -759,6 +759,21 @@
       },
       "width" : 400.0,
       "zIndex" : 1
+    }, {
+      "componentType" : "LABEL",
+      "groupIdentifier" : "flow-contents-group",
+      "height" : 128.0,
+      "identifier" : "9b397238-623b-3ab5-9a16-8cda449c8cb9",
+      "label" : "SplitREcord",
+      "position" : {
+        "x" : -1304.0,
+        "y" : -104.0
+      },
+      "style" : {
+        "font-size" : "12px"
+      },
+      "width" : 536.0,
+      "zIndex" : 2
     } ],
     "maxConcurrentTasks" : 1,
     "name" : "Load_Balance (2)",
@@ -1305,6 +1320,6 @@
   "snapshotMetadata" : {
     "author" : "admin",
     "flowIdentifier" : "Loadbalance",
-    "timestamp" : 1776368995540
+    "timestamp" : 1776369112707
   }
 }
