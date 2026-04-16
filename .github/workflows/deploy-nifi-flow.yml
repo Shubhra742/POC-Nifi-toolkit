@@ -16,86 +16,26 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Get changed flow name and commit SHA
-        id: info
+      - name: Get new commit SHA
+        id: version
         run: |
           VERSION=$(git rev-parse HEAD)
-          CHANGED=$(git diff --name-only HEAD~1 HEAD | grep "default/.*\.json" | head -1)
-          FLOW_NAME=$(basename "$CHANGED" .json)
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
-          echo "FLOW_NAME=$FLOW_NAME" >> $GITHUB_OUTPUT
-          echo "Flow: $FLOW_NAME | Version: $VERSION"
+          echo "Deploying version: $VERSION"
 
-      - name: Check if flow already exists on PROD
-        id: check
+      - name: Change version on existing PROD flow
         run: |
-          # Get list of process groups on PROD
-          PG_LIST=$(/opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-list \
-            -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
-            -pgid 52295672-019d-1000-b5ff-9d0bfbe1b89a \
-            -ot json 2>/dev/null)
-
-          # Find PG ID that matches flow name and has version control
-          FLOW_NAME="${{ steps.info.outputs.FLOW_NAME }}"
-          
-          PG_ID=$(echo "$PG_LIST" | python3 -c "
-          import sys, json
-          try:
-              data = json.load(sys.stdin)
-              pgs = data.get('processGroupFlows', {}).get('processGroups', 
-                    data.get('processGroups', []))
-              for pg in pgs:
-                  component = pg.get('component', {})
-                  name = component.get('name', '')
-                  vc = component.get('versionedComponentId', '') or \
-                       pg.get('versionedComponentId', '')
-                  status = pg.get('versionControlInformation') or \
-                           component.get('versionControlInformation')
-                  if name.lower().replace(' ', '_') == '$FLOW_NAME'.lower().replace(' ', '_') and status:
-                      print(pg['id'])
-                      break
-          except:
-              pass
-          " 2>/dev/null)
-
-          if [ -n "$PG_ID" ]; then
-            echo "EXISTS=true" >> $GITHUB_OUTPUT
-            echo "PG_ID=$PG_ID" >> $GITHUB_OUTPUT
-            echo "Flow exists on PROD with ID: $PG_ID"
-          else
-            echo "EXISTS=false" >> $GITHUB_OUTPUT
-            echo "Flow does NOT exist on PROD - will import fresh"
-          fi
-
-      - name: CASE 1 - Update existing flow version on PROD
-        if: steps.check.outputs.EXISTS == 'true'
-        run: |
-          echo "Updating existing process group: ${{ steps.check.outputs.PG_ID }}"
           /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-change-version \
             -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
-            -pgid ${{ steps.check.outputs.PG_ID }} \
-            -fv ${{ steps.info.outputs.VERSION }}
-          echo "✅ Updated existing flow to: ${{ steps.info.outputs.VERSION }}"
+            -pgid 952fc8b2-019d-1000-db88-83e8b605f342 \
+            -fv ${{ steps.version.outputs.VERSION }}
+          echo "✅ PROD updated to: ${{ steps.version.outputs.VERSION }}"
 
-      - name: CASE 2 - Fresh import flow to PROD
-        if: steps.check.outputs.EXISTS == 'false'
+      - name: Verify
         run: |
-          echo "Fresh importing flow: ${{ steps.info.outputs.FLOW_NAME }}"
-          /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-import \
+          /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-get-version \
             -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
-            -rcid 8c333ca5-019d-1000-ffff-ffff9dd513db \
-            --flowBranch main \
-            -b default \
-            -f ${{ steps.info.outputs.FLOW_NAME }} \
-            -pgid 52295672-019d-1000-b5ff-9d0bfbe1b89a
-          echo "✅ Fresh imported flow: ${{ steps.info.outputs.FLOW_NAME }}"
-
-      - name: Verify deployment
-        run: |
-          /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-list \
-            -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
-            -pgid 52295672-019d-1000-b5ff-9d0bfbe1b89a
-          echo "✅ Deployment complete!"
+            -pgid 952fc8b2-019d-1000-db88-83e8b605f342
 
   rollback:
     runs-on: self-hosted
@@ -108,38 +48,12 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Get previous version and PG ID
-        id: rollback_info
+      - name: Rollback to previous version
         run: |
           PREV=$(git rev-parse HEAD~1)
-          echo "PREV=$PREV" >> $GITHUB_OUTPUT
-
-          PG_LIST=$(/opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-list \
-            -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
-            -pgid 52295672-019d-1000-b5ff-9d0bfbe1b89a \
-            -ot json 2>/dev/null)
-
-          PG_ID=$(echo "$PG_LIST" | python3 -c "
-          import sys, json
-          try:
-              data = json.load(sys.stdin)
-              pgs = data.get('processGroups', [])
-              for pg in pgs:
-                  if pg.get('versionControlInformation'):
-                      print(pg['id'])
-                      break
-          except:
-              pass
-          " 2>/dev/null)
-
-          echo "PG_ID=$PG_ID" >> $GITHUB_OUTPUT
           echo "Rolling back to: $PREV"
-
-      - name: Rollback to previous version
-        if: steps.rollback_info.outputs.PG_ID != ''
-        run: |
           /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-change-version \
             -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
-            -pgid ${{ steps.rollback_info.outputs.PG_ID }} \
-            -fv ${{ steps.rollback_info.outputs.PREV }}
-          echo "⚠️ Rolled back to: ${{ steps.rollback_info.outputs.PREV }}"
+            -pgid 952fc8b2-019d-1000-db88-83e8b605f342 \
+            -fv $PREV
+          echo "⚠️ Rolled back to: $PREV"
