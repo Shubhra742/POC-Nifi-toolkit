@@ -1142,8 +1142,8 @@
       "name" : "LogAttribute",
       "penaltyDuration" : "30 sec",
       "position" : {
-        "x" : -1448.999991513624,
-        "y" : 332.0000134657348
+        "x" : -1664.0,
+        "y" : 368.0
       },
       "properties" : {
         "Log FlowFile Properties" : "true",
@@ -1305,6 +1305,6 @@
   "snapshotMetadata" : {
     "author" : "CN=admin, OU=NIFI",
     "flowIdentifier" : "Loadbalance",
-    "timestamp" : 1776324085066
+    "timestamp" : 1776324403377
   }
 }
