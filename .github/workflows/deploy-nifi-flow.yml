@@ -4,26 +4,51 @@ on:
   push:
     branches: [main]
     paths:
-      - 'default/Loadbalance.json'
+      - 'default/*.json'
 
 jobs:
   deploy:
     runs-on: self-hosted
 
     steps:
-      - name: Import latest flow from GitHub to PROD
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Get new commit SHA
+        id: version
         run: |
-          /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-import \
+          VERSION=$(git rev-parse HEAD)
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "Deploying version: $VERSION"
+
+      - name: Update existing PROD flow to latest version
+        run: |
+          /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-change-version \
             -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
-            -rcid 8c333ca5-019d-1000-ffff-ffff9dd513db \
-            --flowBranch main \
-            -b default \
-            -f Loadbalance \
-            -pgid 52295672-019d-1000-b5ff-9d0bfbe1b89a
-          echo "✅ New version deployed to PROD!"
+            -pgid 9045c02f-019d-1000-8fab-b3062dbc2a0c \
+            -fv ${{ steps.version.outputs.VERSION }}
+          echo "✅ PROD updated to: ${{ steps.version.outputs.VERSION }}"
 
       - name: Verify deployment
         run: |
-          /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-list \
+          /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-get-version \
             -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
-            -pgid 52295672-019d-1000-b5ff-9d0bfbe1b89a
+            -pgid 9045c02f-019d-1000-8fab-b3062dbc2a0c
+
+  rollback:
+    runs-on: self-hosted
+    needs: deploy
+    if: failure()
+
+    steps:
+      - name: Auto Rollback to previous version
+        run: |
+          PREV=$(git rev-parse HEAD~1)
+          echo "Rolling back to: $PREV"
+          /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-change-version \
+            -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
+            -pgid 9045c02f-019d-1000-8fab-b3062dbc2a0c \
+            -fv $PREV
+          echo "⚠️ Rolled back to: $PREV"
