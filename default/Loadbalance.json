@@ -1,10 +1,10 @@
 {
   "externalControllerServices" : { },
   "flow" : {
-    "createdTimestamp" : 1776368976882,
+    "createdTimestamp" : 1776368994421,
     "description" : "",
     "identifier" : "Loadbalance",
-    "lastModifiedTimestamp" : 1776368976882,
+    "lastModifiedTimestamp" : 1776368994421,
     "name" : "Loadbalance",
     "versionCount" : 0
   },
@@ -759,6 +759,21 @@
       },
       "width" : 400.0,
       "zIndex" : 1
+    }, {
+      "componentType" : "LABEL",
+      "groupIdentifier" : "flow-contents-group",
+      "height" : 128.0,
+      "identifier" : "9b397238-623b-3ab5-9a16-8cda449c8cb9",
+      "label" : "SplitREcord",
+      "position" : {
+        "x" : -1304.0,
+        "y" : -104.0
+      },
+      "style" : {
+        "font-size" : "12px"
+      },
+      "width" : 536.0,
+      "zIndex" : 2
     } ],
     "maxConcurrentTasks" : 1,
     "name" : "Load_Balance",
@@ -1414,8 +1429,5 @@
   "parameterContexts" : { },
   "parameterProviders" : { },
   "snapshotMetadata" : {
-    "author" : "CN=admin, OU=NIFI",
-    "flowIdentifier" : "Loadbalance",
-    "timestamp" : 1776369057926
   }
 }
