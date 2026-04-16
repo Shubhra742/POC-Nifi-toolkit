@@ -744,7 +744,22 @@
     "funnels" : [ ],
     "identifier" : "flow-contents-group",
     "inputPorts" : [ ],
-    "labels" : [ ],
+    "labels" : [ {
+      "componentType" : "LABEL",
+      "groupIdentifier" : "flow-contents-group",
+      "height" : 136.0,
+      "identifier" : "93d8b0e7-d2cd-3eba-a898-47b773b8474c",
+      "label" : "Generate flow file processor",
+      "position" : {
+        "x" : -1848.0,
+        "y" : 0.0
+      },
+      "style" : {
+        "font-size" : "12px"
+      },
+      "width" : 400.0,
+      "zIndex" : 1
+    } ],
     "maxConcurrentTasks" : 1,
     "name" : "Load_Balance",
     "outputPorts" : [ ],
@@ -1401,6 +1416,6 @@
   "snapshotMetadata" : {
     "author" : "CN=admin, OU=NIFI",
     "flowIdentifier" : "Loadbalance",
-    "timestamp" : 1776319690353
+    "timestamp" : 1776320097129
   }
 }
