@@ -807,6 +807,21 @@
     }, {
       "componentType" : "LABEL",
       "groupIdentifier" : "flow-contents-group",
+      "height" : 1080.0,
+      "identifier" : "becd7b24-37c1-3293-a9f0-36afff59cacb",
+      "label" : "Developer1_label",
+      "position" : {
+        "x" : -2000.7102820240339,
+        "y" : -449.31242238989216
+      },
+      "style" : {
+        "font-size" : "12px"
+      },
+      "width" : 1032.0,
+      "zIndex" : 6
+    }, {
+      "componentType" : "LABEL",
+      "groupIdentifier" : "flow-contents-group",
       "height" : 150.0,
       "identifier" : "eaa8e472-58e3-34c7-853d-d2acdea37900",
       "label" : "11111",
@@ -1587,6 +1602,6 @@
   "snapshotMetadata" : {
     "author" : "CN=admin, OU=NIFI",
     "flowIdentifier" : "Loadbalance",
-    "timestamp" : 1776440375339
+    "timestamp" : 1776441151592
   }
 }
