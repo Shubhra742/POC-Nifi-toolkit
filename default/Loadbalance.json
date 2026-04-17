@@ -851,7 +851,7 @@
       "zIndex" : 5
     } ],
     "maxConcurrentTasks" : 1,
-    "name" : "Load_Balance",
+    "name" : "Load_Balance12",
     "outputPorts" : [ ],
     "position" : {
       "x" : 0.0,
@@ -1864,6 +1864,201 @@
       "style" : { },
       "type" : "org.apache.nifi.processors.standard.LogAttribute",
       "yieldDuration" : "1 sec"
+    }, {
+      "autoTerminatedRelationships" : [ ],
+      "backoffMechanism" : "PENALIZE_FLOWFILE",
+      "bulletinLevel" : "WARN",
+      "bundle" : {
+        "artifact" : "nifi-cdc-mysql-nar",
+        "group" : "org.apache.nifi",
+        "version" : "2.8.0"
+      },
+      "comments" : "",
+      "componentType" : "PROCESSOR",
+      "concurrentlySchedulableTaskCount" : 1,
+      "executionNode" : "PRIMARY",
+      "groupIdentifier" : "flow-contents-group",
+      "identifier" : "fb2be1c9-cf6a-3d02-a51a-bd90f450b2f1",
+      "maxBackoffPeriod" : "10 mins",
+      "name" : "CaptureChangeMySQL",
+      "penaltyDuration" : "30 sec",
+      "position" : {
+        "x" : -2448.0,
+        "y" : -1168.0
+      },
+      "properties" : {
+        "Include DDL Events" : "false",
+        "Events Per FlowFile" : "1",
+        "Max Wait Time" : "30 seconds",
+        "MySQL Driver Class Name" : "com.mysql.jdbc.Driver",
+        "SSL Mode" : "DISABLED",
+        "Use Binlog GTID" : "false",
+        "Event Processing Strategy" : "MAX_EVENTS_PER_FLOWFILE",
+        "Include Begin/Commit Events" : "false",
+        "Retrieve All Records" : "true"
+      },
+      "propertyDescriptors" : {
+        "Include DDL Events" : {
+          "displayName" : "Include DDL Events",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Include DDL Events",
+          "sensitive" : false
+        },
+        "Events Per FlowFile" : {
+          "displayName" : "Events Per FlowFile",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Events Per FlowFile",
+          "sensitive" : false
+        },
+        "Initial Binlog Position" : {
+          "displayName" : "Initial Binlog Position",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Initial Binlog Position",
+          "sensitive" : false
+        },
+        "Table Name Pattern" : {
+          "displayName" : "Table Name Pattern",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Table Name Pattern",
+          "sensitive" : false
+        },
+        "Max Wait Time" : {
+          "displayName" : "Max Wait Time",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Max Wait Time",
+          "sensitive" : false
+        },
+        "MySQL Driver Class Name" : {
+          "displayName" : "MySQL Driver Class Name",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "MySQL Driver Class Name",
+          "sensitive" : false
+        },
+        "Initial Sequence ID" : {
+          "displayName" : "Initial Sequence ID",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Initial Sequence ID",
+          "sensitive" : false
+        },
+        "SSL Mode" : {
+          "displayName" : "SSL Mode",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "SSL Mode",
+          "sensitive" : false
+        },
+        "Use Binlog GTID" : {
+          "displayName" : "Use Binlog GTID",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Use Binlog GTID",
+          "sensitive" : false
+        },
+        "Initial Binlog GTID" : {
+          "displayName" : "Initial Binlog GTID",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Initial Binlog GTID",
+          "sensitive" : false
+        },
+        "MySQL Nodes" : {
+          "displayName" : "MySQL Nodes",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "MySQL Nodes",
+          "sensitive" : false
+        },
+        "MySQL Driver Locations" : {
+          "displayName" : "MySQL Driver Locations",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "MySQL Driver Locations",
+          "resourceDefinition" : {
+            "cardinality" : "MULTIPLE",
+            "resourceTypes" : [ "DIRECTORY", "FILE", "URL" ]
+          },
+          "sensitive" : false
+        },
+        "Event Processing Strategy" : {
+          "displayName" : "Event Processing Strategy",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Event Processing Strategy",
+          "sensitive" : false
+        },
+        "SSL Context Service" : {
+          "displayName" : "SSL Context Service",
+          "dynamic" : false,
+          "identifiesControllerService" : true,
+          "name" : "SSL Context Service",
+          "sensitive" : false
+        },
+        "Server ID" : {
+          "displayName" : "Server ID",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Server ID",
+          "sensitive" : false
+        },
+        "Username" : {
+          "displayName" : "Username",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Username",
+          "sensitive" : false
+        },
+        "Include Begin/Commit Events" : {
+          "displayName" : "Include Begin/Commit Events",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Include Begin/Commit Events",
+          "sensitive" : false
+        },
+        "Retrieve All Records" : {
+          "displayName" : "Retrieve All Records",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Retrieve All Records",
+          "sensitive" : false
+        },
+        "Initial Binlog Filename" : {
+          "displayName" : "Initial Binlog Filename",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Initial Binlog Filename",
+          "sensitive" : false
+        },
+        "Database/Schema Name Pattern" : {
+          "displayName" : "Database/Schema Name Pattern",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Database/Schema Name Pattern",
+          "sensitive" : false
+        },
+        "Password" : {
+          "displayName" : "Password",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Password",
+          "sensitive" : true
+        }
+      },
+      "retriedRelationships" : [ ],
+      "retryCount" : 10,
+      "runDurationMillis" : 0,
+      "scheduledState" : "ENABLED",
+      "schedulingPeriod" : "0 sec",
+      "schedulingStrategy" : "TIMER_DRIVEN",
+      "style" : { },
+      "type" : "org.apache.nifi.cdc.mysql.processors.CaptureChangeMySQL",
+      "yieldDuration" : "1 sec"
     } ],
     "remoteProcessGroups" : [ ],
     "scheduledState" : "ENABLED",
@@ -1876,6 +2071,6 @@
   "snapshotMetadata" : {
     "author" : "admin",
     "flowIdentifier" : "Loadbalance",
-    "timestamp" : 1776452546193
+    "timestamp" : 1776454061864
   }
 }
