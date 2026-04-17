@@ -955,6 +955,71 @@
       "type" : "org.apache.nifi.processors.standard.LogAttribute",
       "yieldDuration" : "1 sec"
     }, {
+      "autoTerminatedRelationships" : [ ],
+      "backoffMechanism" : "PENALIZE_FLOWFILE",
+      "bulletinLevel" : "WARN",
+      "bundle" : {
+        "artifact" : "nifi-update-attribute-nar",
+        "group" : "org.apache.nifi",
+        "version" : "2.8.0"
+      },
+      "comments" : "",
+      "componentType" : "PROCESSOR",
+      "concurrentlySchedulableTaskCount" : 1,
+      "executionNode" : "ALL",
+      "groupIdentifier" : "flow-contents-group",
+      "identifier" : "591548e8-5679-35ec-be03-fe2741c76d8d",
+      "maxBackoffPeriod" : "10 mins",
+      "name" : "UpdateAttribute",
+      "penaltyDuration" : "30 sec",
+      "position" : {
+        "x" : 570.1791139109741,
+        "y" : 626.6103323145792
+      },
+      "properties" : {
+        "Store State" : "Do not store state",
+        "Cache Value Lookup Cache Size" : "100"
+      },
+      "propertyDescriptors" : {
+        "Delete Attributes Expression" : {
+          "displayName" : "Delete Attributes Expression",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Delete Attributes Expression",
+          "sensitive" : false
+        },
+        "Store State" : {
+          "displayName" : "Store State",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Store State",
+          "sensitive" : false
+        },
+        "Cache Value Lookup Cache Size" : {
+          "displayName" : "Cache Value Lookup Cache Size",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Cache Value Lookup Cache Size",
+          "sensitive" : false
+        },
+        "Stateful Variables Initial Value" : {
+          "displayName" : "Stateful Variables Initial Value",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Stateful Variables Initial Value",
+          "sensitive" : false
+        }
+      },
+      "retriedRelationships" : [ ],
+      "retryCount" : 10,
+      "runDurationMillis" : 25,
+      "scheduledState" : "ENABLED",
+      "schedulingPeriod" : "0 sec",
+      "schedulingStrategy" : "TIMER_DRIVEN",
+      "style" : { },
+      "type" : "org.apache.nifi.processors.attributes.UpdateAttribute",
+      "yieldDuration" : "1 sec"
+    }, {
       "autoTerminatedRelationships" : [ "failure", "original" ],
       "backoffMechanism" : "PENALIZE_FLOWFILE",
       "bulletinLevel" : "WARN",
@@ -1600,8 +1665,8 @@
   "parameterContexts" : { },
   "parameterProviders" : { },
   "snapshotMetadata" : {
-    "author" : "CN=admin, OU=NIFI",
+    "author" : "admin",
     "flowIdentifier" : "Loadbalance",
-    "timestamp" : 1776441151592
+    "timestamp" : 1776441532422
   }
 }
