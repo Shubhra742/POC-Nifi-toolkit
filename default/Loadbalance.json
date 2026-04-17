@@ -1787,10 +1787,6 @@
   "snapshotMetadata" : {
     "author" : "CN=admin, OU=NIFI",
     "flowIdentifier" : "Loadbalance",
-<<<<<<< HEAD
     "timestamp" : 1776443794436
-=======
-    "timestamp" : 1776443744048
->>>>>>> origin/main
   }
 }
