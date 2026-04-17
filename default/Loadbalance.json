@@ -747,6 +747,21 @@
     "labels" : [ {
       "componentType" : "LABEL",
       "groupIdentifier" : "flow-contents-group",
+      "height" : 72.0,
+      "identifier" : "36b8ac93-0c44-3f23-b3b2-4d3c70a310da",
+      "label" : "shubhra",
+      "position" : {
+        "x" : -1957.839736553238,
+        "y" : 765.4445664105381
+      },
+      "style" : {
+        "font-size" : "12px"
+      },
+      "width" : 648.0,
+      "zIndex" : 3
+    }, {
+      "componentType" : "LABEL",
+      "groupIdentifier" : "flow-contents-group",
       "height" : 136.0,
       "identifier" : "93d8b0e7-d2cd-3eba-a898-47b773b8474c",
       "label" : "Generate flow file processor",
@@ -1542,6 +1557,6 @@
   "snapshotMetadata" : {
     "author" : "CN=admin, OU=NIFI",
     "flowIdentifier" : "Loadbalance",
-    "timestamp" : 1776434204110
+    "timestamp" : 1776437235504
   }
 }
