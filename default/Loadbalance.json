@@ -1140,6 +1140,103 @@
       "type" : "org.apache.nifi.processors.attributes.UpdateAttribute",
       "yieldDuration" : "1 sec"
     }, {
+      "autoTerminatedRelationships" : [ ],
+      "backoffMechanism" : "PENALIZE_FLOWFILE",
+      "bulletinLevel" : "WARN",
+      "bundle" : {
+        "artifact" : "nifi-slack-nar",
+        "group" : "org.apache.nifi",
+        "version" : "2.8.0"
+      },
+      "comments" : "",
+      "componentType" : "PROCESSOR",
+      "concurrentlySchedulableTaskCount" : 1,
+      "executionNode" : "PRIMARY",
+      "groupIdentifier" : "flow-contents-group",
+      "identifier" : "5be89757-8a94-3d42-a3e8-6a7b7f7d6d3f",
+      "maxBackoffPeriod" : "10 mins",
+      "name" : "ConsumeSlack",
+      "penaltyDuration" : "30 sec",
+      "position" : {
+        "x" : -2824.0,
+        "y" : -72.0
+      },
+      "properties" : {
+        "Reply Monitor Frequency" : "5 mins",
+        "Include Message Blocks" : "false",
+        "Include Null Fields" : "true",
+        "Resolve Usernames" : "true",
+        "Batch Size" : "100",
+        "Reply Monitor Window" : "7 days"
+      },
+      "propertyDescriptors" : {
+        "Reply Monitor Frequency" : {
+          "displayName" : "Reply Monitor Frequency",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Reply Monitor Frequency",
+          "sensitive" : false
+        },
+        "Include Message Blocks" : {
+          "displayName" : "Include Message Blocks",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Include Message Blocks",
+          "sensitive" : false
+        },
+        "Include Null Fields" : {
+          "displayName" : "Include Null Fields",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Include Null Fields",
+          "sensitive" : false
+        },
+        "Resolve Usernames" : {
+          "displayName" : "Resolve Usernames",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Resolve Usernames",
+          "sensitive" : false
+        },
+        "Batch Size" : {
+          "displayName" : "Batch Size",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Batch Size",
+          "sensitive" : false
+        },
+        "Access Token" : {
+          "displayName" : "Access Token",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Access Token",
+          "sensitive" : true
+        },
+        "Reply Monitor Window" : {
+          "displayName" : "Reply Monitor Window",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Reply Monitor Window",
+          "sensitive" : false
+        },
+        "Channels" : {
+          "displayName" : "Channels",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Channels",
+          "sensitive" : false
+        }
+      },
+      "retriedRelationships" : [ ],
+      "retryCount" : 10,
+      "runDurationMillis" : 0,
+      "scheduledState" : "ENABLED",
+      "schedulingPeriod" : "0 sec",
+      "schedulingStrategy" : "TIMER_DRIVEN",
+      "style" : { },
+      "type" : "org.apache.nifi.processors.slack.ConsumeSlack",
+      "yieldDuration" : "3 sec"
+    }, {
       "autoTerminatedRelationships" : [ "failure", "original" ],
       "backoffMechanism" : "PENALIZE_FLOWFILE",
       "bulletinLevel" : "WARN",
@@ -1787,6 +1884,6 @@
   "snapshotMetadata" : {
     "author" : "CN=admin, OU=NIFI",
     "flowIdentifier" : "Loadbalance",
-    "timestamp" : 1776443794436
+    "timestamp" : 1776452509029
   }
 }
