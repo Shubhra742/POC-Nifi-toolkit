@@ -766,8 +766,8 @@
       "identifier" : "5dcdf62d-7343-3cfe-a527-5043d96694b6",
       "label" : "shubhra1",
       "position" : {
-        "x" : -1668.8210757409445,
-        "y" : 1109.4006586169048
+        "x" : -4744.0,
+        "y" : -280.0
       },
       "style" : {
         "font-size" : "12px"
@@ -1585,8 +1585,8 @@
   "parameterContexts" : { },
   "parameterProviders" : { },
   "snapshotMetadata" : {
-    "author" : "admin",
+    "author" : "CN=admin, OU=NIFI",
     "flowIdentifier" : "Loadbalance",
-    "timestamp" : 1776439560362
+    "timestamp" : 1776440375339
   }
 }
