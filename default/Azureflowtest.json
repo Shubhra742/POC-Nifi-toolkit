@@ -8318,6 +8318,6 @@
   "snapshotMetadata" : {
     "author" : "CN=admin, OU=NIFI",
     "flowIdentifier" : "Azureflowtest",
-    "timestamp" : 1776766329595
+    "timestamp" : 1776764669862
   }
 }
