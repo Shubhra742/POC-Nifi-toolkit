@@ -2086,7 +2086,7 @@
   "parameterContexts" : { },
   "parameterProviders" : { },
   "snapshotMetadata" : {
-    "author" : "CN=admin, OU=NIFI",
+    "author" : "admin",
     "flowIdentifier" : "Loadbalance",
     "timestamp" : 1776762207311
   }
