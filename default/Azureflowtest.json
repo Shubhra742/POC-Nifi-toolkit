@@ -4003,36 +4003,7 @@
           "y" : 288.0
         },
         "properties" : { },
-        "propertyDescriptors" : {
-          "blob" : {
-            "displayName" : "blob",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "blob",
-            "sensitive" : true
-          },
-          "storage-endpoint-suffix" : {
-            "displayName" : "storage-endpoint-suffix",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "storage-endpoint-suffix",
-            "sensitive" : true
-          },
-          "container-name" : {
-            "displayName" : "container-name",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "container-name",
-            "sensitive" : true
-          },
-          "cse-key-type" : {
-            "displayName" : "cse-key-type",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "cse-key-type",
-            "sensitive" : true
-          }
-        },
+        "propertyDescriptors" : { },
         "retriedRelationships" : [ ],
         "retryCount" : 10,
         "runDurationMillis" : 0,
@@ -4170,22 +4141,7 @@
           "y" : 40.0
         },
         "properties" : { },
-        "propertyDescriptors" : {
-          "JSON container options" : {
-            "displayName" : "JSON container options",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "JSON container options",
-            "sensitive" : true
-          },
-          "Wrap Single Record" : {
-            "displayName" : "Wrap Single Record",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "Wrap Single Record",
-            "sensitive" : true
-          }
-        },
+        "propertyDescriptors" : { },
         "retriedRelationships" : [ ],
         "retryCount" : 10,
         "runDurationMillis" : 0,
@@ -6744,6 +6700,63 @@
       "backoffMechanism" : "PENALIZE_FLOWFILE",
       "bulletinLevel" : "WARN",
       "bundle" : {
+        "artifact" : "nifi-standard-nar",
+        "group" : "org.apache.nifi",
+        "version" : "2.8.0"
+      },
+      "comments" : "",
+      "componentType" : "PROCESSOR",
+      "concurrentlySchedulableTaskCount" : 1,
+      "executionNode" : "ALL",
+      "groupIdentifier" : "flow-contents-group",
+      "identifier" : "4c18685e-2bde-3222-bf50-98263826d08a",
+      "maxBackoffPeriod" : "10 mins",
+      "name" : "ConvertRecord",
+      "penaltyDuration" : "30 sec",
+      "position" : {
+        "x" : 451.9466666666665,
+        "y" : 599.588888888889
+      },
+      "properties" : {
+        "Include Zero Record FlowFiles" : "true"
+      },
+      "propertyDescriptors" : {
+        "Include Zero Record FlowFiles" : {
+          "displayName" : "Include Zero Record FlowFiles",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Include Zero Record FlowFiles",
+          "sensitive" : false
+        },
+        "Record Writer" : {
+          "displayName" : "Record Writer",
+          "dynamic" : false,
+          "identifiesControllerService" : true,
+          "name" : "Record Writer",
+          "sensitive" : false
+        },
+        "Record Reader" : {
+          "displayName" : "Record Reader",
+          "dynamic" : false,
+          "identifiesControllerService" : true,
+          "name" : "Record Reader",
+          "sensitive" : false
+        }
+      },
+      "retriedRelationships" : [ ],
+      "retryCount" : 10,
+      "runDurationMillis" : 0,
+      "scheduledState" : "ENABLED",
+      "schedulingPeriod" : "0 sec",
+      "schedulingStrategy" : "TIMER_DRIVEN",
+      "style" : { },
+      "type" : "org.apache.nifi.processors.standard.ConvertRecord",
+      "yieldDuration" : "1 sec"
+    }, {
+      "autoTerminatedRelationships" : [ ],
+      "backoffMechanism" : "PENALIZE_FLOWFILE",
+      "bulletinLevel" : "WARN",
+      "bundle" : {
         "artifact" : "nifi-update-attribute-nar",
         "group" : "org.apache.nifi",
         "version" : "2.8.0"
@@ -8196,6 +8209,6 @@
   "snapshotMetadata" : {
     "author" : "admin",
     "flowIdentifier" : "Azureflowtest",
-    "timestamp" : 1776454302228
+    "timestamp" : 1776764695395
   }
 }
