@@ -1158,8 +1158,8 @@
       "name" : "AttributesToJSON",
       "penaltyDuration" : "30 sec",
       "position" : {
-        "x" : -3280.0,
-        "y" : 40.0
+        "x" : -3856.0,
+        "y" : 336.0
       },
       "properties" : {
         "Destination" : "flowfile-attribute",
@@ -1884,8 +1884,8 @@
       "name" : "CaptureChangeMySQL",
       "penaltyDuration" : "30 sec",
       "position" : {
-        "x" : -2856.0,
-        "y" : -960.0
+        "x" : -3216.0,
+        "y" : -992.0
       },
       "properties" : {
         "Include DDL Events" : "false",
@@ -2073,6 +2073,6 @@
   "snapshotMetadata" : {
     "author" : "admin",
     "flowIdentifier" : "Loadbalance",
-    "timestamp" : 1776757215108
+    "timestamp" : 1776757201911
   }
 }
