@@ -7954,6 +7954,61 @@
       "type" : "org.apache.nifi.processors.standard.ReplaceText",
       "yieldDuration" : "1 sec"
     }, {
+      "autoTerminatedRelationships" : [ ],
+      "backoffMechanism" : "PENALIZE_FLOWFILE",
+      "bulletinLevel" : "WARN",
+      "bundle" : {
+        "artifact" : "nifi-stateful-analysis-nar",
+        "group" : "org.apache.nifi",
+        "version" : "2.8.0"
+      },
+      "comments" : "",
+      "componentType" : "PROCESSOR",
+      "concurrentlySchedulableTaskCount" : 1,
+      "executionNode" : "ALL",
+      "groupIdentifier" : "flow-contents-group",
+      "identifier" : "e610416b-1513-31a6-afba-9688e9b9b7a6",
+      "maxBackoffPeriod" : "10 mins",
+      "name" : "AttributeRollingWindow",
+      "penaltyDuration" : "30 sec",
+      "position" : {
+        "x" : -1779.8400000000001,
+        "y" : 997.8133333333335
+      },
+      "properties" : { },
+      "propertyDescriptors" : {
+        "Subwindow Length" : {
+          "displayName" : "Subwindow Length",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Subwindow Length",
+          "sensitive" : false
+        },
+        "Value to Track" : {
+          "displayName" : "Value to Track",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Value to Track",
+          "sensitive" : false
+        },
+        "Time Window" : {
+          "displayName" : "Time Window",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Time Window",
+          "sensitive" : false
+        }
+      },
+      "retriedRelationships" : [ ],
+      "retryCount" : 10,
+      "runDurationMillis" : 0,
+      "scheduledState" : "ENABLED",
+      "schedulingPeriod" : "0 sec",
+      "schedulingStrategy" : "TIMER_DRIVEN",
+      "style" : { },
+      "type" : "org.apache.nifi.processors.stateful.analysis.AttributeRollingWindow",
+      "yieldDuration" : "1 sec"
+    }, {
       "autoTerminatedRelationships" : [ "failure" ],
       "backoffMechanism" : "PENALIZE_FLOWFILE",
       "bulletinLevel" : "WARN",
