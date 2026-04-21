@@ -1884,8 +1884,8 @@
       "name" : "CaptureChangeMySQL",
       "penaltyDuration" : "30 sec",
       "position" : {
-        "x" : -2448.0,
-        "y" : -1168.0
+        "x" : -2544.0,
+        "y" : -1008.0
       },
       "properties" : {
         "Include DDL Events" : "false",
@@ -2073,6 +2073,6 @@
   "snapshotMetadata" : {
     "author" : "CN=admin, OU=NIFI",
     "flowIdentifier" : "Loadbalance",
-    "timestamp" : 1776752887226
+    "timestamp" : 1776754617927
   }
 }
