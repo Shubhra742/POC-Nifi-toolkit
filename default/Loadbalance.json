@@ -1158,8 +1158,8 @@
       "name" : "AttributesToJSON",
       "penaltyDuration" : "30 sec",
       "position" : {
-        "x" : -2832.0,
-        "y" : -152.0
+        "x" : -3544.0,
+        "y" : 272.0
       },
       "properties" : {
         "Destination" : "flowfile-attribute",
@@ -2073,6 +2073,6 @@
   "snapshotMetadata" : {
     "author" : "CN=admin, OU=NIFI",
     "flowIdentifier" : "Loadbalance",
-    "timestamp" : 1776757861221
+    "timestamp" : 1776758629549
   }
 }
