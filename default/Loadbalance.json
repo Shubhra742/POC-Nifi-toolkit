@@ -1893,6 +1893,7 @@
         "MySQL Driver Class Name" : "com.mysql.jdbc.Driver",
         "SSL Mode" : "DISABLED",
         "Use Binlog GTID" : "false",
+        "MySQL Nodes" : "MySQLNodes",
         "Event Processing Strategy" : "MAX_EVENTS_PER_FLOWFILE",
         "Include Begin/Commit Events" : "false",
         "Retrieve All Records" : "true"
@@ -2071,6 +2072,6 @@
   "snapshotMetadata" : {
     "author" : "admin",
     "flowIdentifier" : "Loadbalance",
-    "timestamp" : 1776454061864
+    "timestamp" : 1776752953397
   }
 }
