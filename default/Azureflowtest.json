@@ -596,6 +596,13 @@
           "group" : "org.apache.nifi",
           "version" : "2.8.0"
         },
+        "type" : "org.apache.nifi.ssl.SSLContextProvider"
+      }, {
+        "bundle" : {
+          "artifact" : "nifi-standard-services-api-nar",
+          "group" : "org.apache.nifi",
+          "version" : "2.8.0"
+        },
         "type" : "org.apache.nifi.ssl.RestrictedSSLContextService"
       }, {
         "bundle" : {
@@ -604,13 +611,6 @@
           "version" : "2.8.0"
         },
         "type" : "org.apache.nifi.ssl.SSLContextService"
-      }, {
-        "bundle" : {
-          "artifact" : "nifi-standard-services-api-nar",
-          "group" : "org.apache.nifi",
-          "version" : "2.8.0"
-        },
-        "type" : "org.apache.nifi.ssl.SSLContextProvider"
       } ],
       "groupIdentifier" : "flow-contents-group",
       "identifier" : "15d552a9-a49a-31fa-a5b1-3d901eff0fc9",
@@ -829,6 +829,13 @@
           "group" : "org.apache.nifi",
           "version" : "2.8.0"
         },
+        "type" : "org.apache.nifi.ssl.SSLContextProvider"
+      }, {
+        "bundle" : {
+          "artifact" : "nifi-standard-services-api-nar",
+          "group" : "org.apache.nifi",
+          "version" : "2.8.0"
+        },
         "type" : "org.apache.nifi.ssl.RestrictedSSLContextService"
       }, {
         "bundle" : {
@@ -837,13 +844,6 @@
           "version" : "2.8.0"
         },
         "type" : "org.apache.nifi.ssl.SSLContextService"
-      }, {
-        "bundle" : {
-          "artifact" : "nifi-standard-services-api-nar",
-          "group" : "org.apache.nifi",
-          "version" : "2.8.0"
-        },
-        "type" : "org.apache.nifi.ssl.SSLContextProvider"
       } ],
       "groupIdentifier" : "flow-contents-group",
       "identifier" : "2bd8f098-2fc9-3e31-89bf-43e401c79bbd",
@@ -1083,6 +1083,13 @@
           "group" : "org.apache.nifi",
           "version" : "2.8.0"
         },
+        "type" : "org.apache.nifi.ssl.SSLContextProvider"
+      }, {
+        "bundle" : {
+          "artifact" : "nifi-standard-services-api-nar",
+          "group" : "org.apache.nifi",
+          "version" : "2.8.0"
+        },
         "type" : "org.apache.nifi.ssl.RestrictedSSLContextService"
       }, {
         "bundle" : {
@@ -1091,13 +1098,6 @@
           "version" : "2.8.0"
         },
         "type" : "org.apache.nifi.ssl.SSLContextService"
-      }, {
-        "bundle" : {
-          "artifact" : "nifi-standard-services-api-nar",
-          "group" : "org.apache.nifi",
-          "version" : "2.8.0"
-        },
-        "type" : "org.apache.nifi.ssl.SSLContextProvider"
       } ],
       "groupIdentifier" : "flow-contents-group",
       "identifier" : "3c81b960-d0dd-3e16-b4fc-af2c5256bcd9",
@@ -1354,6 +1354,13 @@
           "group" : "org.apache.nifi",
           "version" : "2.8.0"
         },
+        "type" : "org.apache.nifi.ssl.SSLContextProvider"
+      }, {
+        "bundle" : {
+          "artifact" : "nifi-standard-services-api-nar",
+          "group" : "org.apache.nifi",
+          "version" : "2.8.0"
+        },
         "type" : "org.apache.nifi.ssl.RestrictedSSLContextService"
       }, {
         "bundle" : {
@@ -1362,13 +1369,6 @@
           "version" : "2.8.0"
         },
         "type" : "org.apache.nifi.ssl.SSLContextService"
-      }, {
-        "bundle" : {
-          "artifact" : "nifi-standard-services-api-nar",
-          "group" : "org.apache.nifi",
-          "version" : "2.8.0"
-        },
-        "type" : "org.apache.nifi.ssl.SSLContextProvider"
       } ],
       "groupIdentifier" : "flow-contents-group",
       "identifier" : "9aba701e-f3b2-30d5-ba44-106680763815",
@@ -1463,14 +1463,14 @@
           "group" : "org.apache.nifi",
           "version" : "2.8.0"
         },
-        "type" : "org.apache.nifi.lookup.RecordLookupService"
+        "type" : "org.apache.nifi.lookup.LookupService"
       }, {
         "bundle" : {
           "artifact" : "nifi-standard-services-api-nar",
           "group" : "org.apache.nifi",
           "version" : "2.8.0"
         },
-        "type" : "org.apache.nifi.lookup.LookupService"
+        "type" : "org.apache.nifi.lookup.RecordLookupService"
       } ],
       "groupIdentifier" : "flow-contents-group",
       "identifier" : "a69ceee2-3e7c-3bac-b2d2-2c85e50b1231",
@@ -1660,6 +1660,13 @@
           "group" : "org.apache.nifi",
           "version" : "2.8.0"
         },
+        "type" : "org.apache.nifi.ssl.SSLContextProvider"
+      }, {
+        "bundle" : {
+          "artifact" : "nifi-standard-services-api-nar",
+          "group" : "org.apache.nifi",
+          "version" : "2.8.0"
+        },
         "type" : "org.apache.nifi.ssl.RestrictedSSLContextService"
       }, {
         "bundle" : {
@@ -1668,13 +1675,6 @@
           "version" : "2.8.0"
         },
         "type" : "org.apache.nifi.ssl.SSLContextService"
-      }, {
-        "bundle" : {
-          "artifact" : "nifi-standard-services-api-nar",
-          "group" : "org.apache.nifi",
-          "version" : "2.8.0"
-        },
-        "type" : "org.apache.nifi.ssl.SSLContextProvider"
       } ],
       "groupIdentifier" : "flow-contents-group",
       "identifier" : "d15bfda6-e526-3383-8749-2cf6260b9c3f",
@@ -1769,6 +1769,13 @@
           "group" : "org.apache.nifi",
           "version" : "2.8.0"
         },
+        "type" : "org.apache.nifi.ssl.SSLContextProvider"
+      }, {
+        "bundle" : {
+          "artifact" : "nifi-standard-services-api-nar",
+          "group" : "org.apache.nifi",
+          "version" : "2.8.0"
+        },
         "type" : "org.apache.nifi.ssl.RestrictedSSLContextService"
       }, {
         "bundle" : {
@@ -1777,13 +1784,6 @@
           "version" : "2.8.0"
         },
         "type" : "org.apache.nifi.ssl.SSLContextService"
-      }, {
-        "bundle" : {
-          "artifact" : "nifi-standard-services-api-nar",
-          "group" : "org.apache.nifi",
-          "version" : "2.8.0"
-        },
-        "type" : "org.apache.nifi.ssl.SSLContextProvider"
       } ],
       "groupIdentifier" : "flow-contents-group",
       "identifier" : "d784570d-6135-329e-b353-8a15332c331b",
@@ -1878,14 +1878,14 @@
           "group" : "org.apache.nifi",
           "version" : "2.8.0"
         },
-        "type" : "org.apache.nifi.lookup.RecordLookupService"
+        "type" : "org.apache.nifi.lookup.LookupService"
       }, {
         "bundle" : {
           "artifact" : "nifi-standard-services-api-nar",
           "group" : "org.apache.nifi",
           "version" : "2.8.0"
         },
-        "type" : "org.apache.nifi.lookup.LookupService"
+        "type" : "org.apache.nifi.lookup.RecordLookupService"
       } ],
       "groupIdentifier" : "flow-contents-group",
       "identifier" : "e01688e0-ae93-3f14-98b4-0a7ae2e02dba",
@@ -8338,6 +8338,87 @@
       "style" : { },
       "type" : "org.apache.nifi.processors.standard.ReplaceText",
       "yieldDuration" : "1 sec"
+    }, {
+      "autoTerminatedRelationships" : [ ],
+      "backoffMechanism" : "PENALIZE_FLOWFILE",
+      "bulletinLevel" : "WARN",
+      "bundle" : {
+        "artifact" : "nifi-standard-nar",
+        "group" : "org.apache.nifi",
+        "version" : "2.8.0"
+      },
+      "comments" : "",
+      "componentType" : "PROCESSOR",
+      "concurrentlySchedulableTaskCount" : 1,
+      "executionNode" : "ALL",
+      "groupIdentifier" : "flow-contents-group",
+      "identifier" : "fa140529-a537-3f9b-8704-95f7a86b60d4",
+      "maxBackoffPeriod" : "10 mins",
+      "name" : "AttributesToCSV",
+      "penaltyDuration" : "30 sec",
+      "position" : {
+        "x" : 474.0882957945478,
+        "y" : 400.30903398229714
+      },
+      "properties" : {
+        "Include Schema" : "false",
+        "Destination" : "flowfile-attribute",
+        "Null Value" : "false",
+        "Include Core Attributes" : "true"
+      },
+      "propertyDescriptors" : {
+        "Include Schema" : {
+          "displayName" : "Include Schema",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Include Schema",
+          "sensitive" : false
+        },
+        "Attributes Regular Expression" : {
+          "displayName" : "Attributes Regular Expression",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Attributes Regular Expression",
+          "sensitive" : false
+        },
+        "Destination" : {
+          "displayName" : "Destination",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Destination",
+          "sensitive" : false
+        },
+        "Null Value" : {
+          "displayName" : "Null Value",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Null Value",
+          "sensitive" : false
+        },
+        "Attribute List" : {
+          "displayName" : "Attribute List",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Attribute List",
+          "sensitive" : false
+        },
+        "Include Core Attributes" : {
+          "displayName" : "Include Core Attributes",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Include Core Attributes",
+          "sensitive" : false
+        }
+      },
+      "retriedRelationships" : [ ],
+      "retryCount" : 10,
+      "runDurationMillis" : 0,
+      "scheduledState" : "ENABLED",
+      "schedulingPeriod" : "0 sec",
+      "schedulingStrategy" : "TIMER_DRIVEN",
+      "style" : { },
+      "type" : "org.apache.nifi.processors.standard.AttributesToCSV",
+      "yieldDuration" : "1 sec"
     } ],
     "remoteProcessGroups" : [ ],
     "scheduledState" : "ENABLED",
@@ -8427,8 +8508,8 @@
   },
   "parameterProviders" : { },
   "snapshotMetadata" : {
-    "author" : "CN=admin, OU=NIFI",
+    "author" : "admin",
     "flowIdentifier" : "Azureflowtest",
-    "timestamp" : 1776767637225
+    "timestamp" : 1776767659585
   }
 }
