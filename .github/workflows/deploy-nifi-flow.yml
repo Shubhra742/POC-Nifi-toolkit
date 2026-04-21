@@ -9,7 +9,6 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
-    timeout-minutes: 10  # ← Hard cap. Prevents infinite hangs.
 
     steps:
       - name: Checkout repository
@@ -22,16 +21,9 @@ jobs:
         run: |
           VERSION=$(git rev-parse HEAD)
           CHANGED=$(git diff --name-only HEAD~1 HEAD | grep "default/.*\.json" | head -1)
-
-          # Guard: bail early if no JSON file changed
-          if [ -z "$CHANGED" ]; then
-            echo "No flow JSON changed, skipping."
-            exit 1
-          fi
-
           FLOW_NAME=$(basename "$CHANGED" .json)
-          echo "VERSION=$VERSION"       >> $GITHUB_OUTPUT
-          echo "FLOW_NAME=$FLOW_NAME"   >> $GITHUB_OUTPUT
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "FLOW_NAME=$FLOW_NAME" >> $GITHUB_OUTPUT
           echo "Flow: $FLOW_NAME | SHA: $VERSION"
 
       - name: Find PROD process group ID
@@ -41,50 +33,16 @@ jobs:
             "${{ steps.info.outputs.FLOW_NAME }}" \
             /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
             52295672-019d-1000-b5ff-9d0bfbe1b89a)
-
-          if [ -z "$PG_ID" ]; then
-            echo "ERROR: Could not find process group for ${{ steps.info.outputs.FLOW_NAME }}"
-            exit 1
-          fi
-
           echo "PG_ID=$PG_ID" >> $GITHUB_OUTPUT
           echo "Found PG: $PG_ID"
-
-      # ← IMPORTANT: Stop the PG before version change to avoid hangs
-      - name: Stop process group before deploy
-        run: |
-          /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-stop \
-            -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
-            -pgid ${{ steps.pgid.outputs.PG_ID }}
-          sleep 5  # Give NiFi a moment to drain
-
-      - name: Get latest registry flow version
-        id: regver
-        run: |
-          # ← THIS is the fix. NiFi needs a registry version number, not a Git SHA.
-          # Get the latest version from the NiFi registry for this flow.
-          LATEST_VER=$(/opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-get-version \
-            -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
-            -pgid ${{ steps.pgid.outputs.PG_ID }} \
-            | grep -oP '(?<=Flow Version: )\d+')
-
-          # If your registry is separate, use: nifi reg-list-flow-versions instead
-          echo "LATEST_VER=$LATEST_VER" >> $GITHUB_OUTPUT
-          echo "Registry version to deploy: $LATEST_VER"
 
       - name: Deploy to PROD
         run: |
           /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-change-version \
             -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
             -pgid ${{ steps.pgid.outputs.PG_ID }} \
-            -fv ${{ steps.regver.outputs.LATEST_VER }}
-          echo "✅ Deployed version ${{ steps.regver.outputs.LATEST_VER }}"
-
-      - name: Restart process group after deploy
-        run: |
-          /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-start \
-            -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
-            -pgid ${{ steps.pgid.outputs.PG_ID }}
+            -fv ${{ steps.info.outputs.VERSION }}
+          echo "✅ Deployed!"
 
       - name: Verify deployment
         run: |
@@ -96,7 +54,6 @@ jobs:
     runs-on: self-hosted
     needs: deploy
     if: failure()
-    timeout-minutes: 5
 
     steps:
       - name: Checkout repository
@@ -104,37 +61,18 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Rollback to previous registry version
+      - name: Rollback to previous version
         run: |
+          PREV=$(git rev-parse HEAD~1)
           CHANGED=$(git diff --name-only HEAD~1 HEAD | grep "default/.*\.json" | head -1)
           FLOW_NAME=$(basename "$CHANGED" .json)
-
           PG_ID=$(python3 find_pg.py \
             "$FLOW_NAME" \
             /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
             52295672-019d-1000-b5ff-9d0bfbe1b89a)
-
-          # Get current deployed version, subtract 1 for rollback
-          CURRENT_VER=$(/opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-get-version \
-            -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
-            -pgid $PG_ID \
-            | grep -oP '(?<=Flow Version: )\d+')
-
-          PREV_VER=$((CURRENT_VER - 1))
-
-          echo "Rolling back $PG_ID from v$CURRENT_VER to v$PREV_VER"
-
-          /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-stop \
-            -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
-            -pgid $PG_ID
-
+          echo "Rolling back $PG_ID to $PREV"
           /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-change-version \
             -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
             -pgid $PG_ID \
-            -fv $PREV_VER
-
-          /opt/nifi/nifi-toolkit-2.8.0/bin/cli.sh nifi pg-start \
-            -p /opt/nifi/nifi-toolkit-2.8.0/conf/nifi-prod.props \
-            -pgid $PG_ID
-
-          echo "⚠️ Rolled back to registry version: $PREV_VER"
+            -fv $PREV
+          echo "⚠️ Rolled back to: $PREV"
