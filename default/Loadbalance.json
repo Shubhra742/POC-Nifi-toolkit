@@ -1158,8 +1158,8 @@
       "name" : "AttributesToJSON",
       "penaltyDuration" : "30 sec",
       "position" : {
-        "x" : -3216.0,
-        "y" : 224.0
+        "x" : -3856.0,
+        "y" : 336.0
       },
       "properties" : {
         "Destination" : "flowfile-attribute",
