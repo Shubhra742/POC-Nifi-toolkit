@@ -1159,7 +1159,7 @@
       "penaltyDuration" : "30 sec",
       "position" : {
         "x" : -2952.0,
-        "y" : 472.0
+        "y" : 928.0
       },
       "properties" : {
         "Destination" : "flowfile-attribute",
@@ -2073,6 +2073,6 @@
   "snapshotMetadata" : {
     "author" : "CN=admin, OU=NIFI",
     "flowIdentifier" : "Loadbalance",
-    "timestamp" : 1776759337369
+    "timestamp" : 1776762207311
   }
 }
